@@ -24,4 +24,15 @@ export class PedidoService {
       catchError(e => this.messageHandlerService.errorHandler(e))
     );
   }
+
+  create(pedido : Pedido) : Observable<Pedido> {
+    const
+      jsonServerUrl = `${environment.apiUrl}/cliente/${pedido.idCliente}/pedidos`,
+      url = environment.jsonServer ? this.baseUrl : jsonServerUrl;
+
+    return this.http.post<Pedido>(url, pedido).pipe(
+      map(obj => obj),
+      catchError(e => this.messageHandlerService.errorHandler(e))
+    );
+  }
 }

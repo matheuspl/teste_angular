@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HeaderService } from '../../components/template/header/header.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { HeaderService } from '../../components/template/header/header.service';
 })
 export class PedidoComponent implements OnInit {
 
-  constructor(private headerService: HeaderService) {
+  constructor(
+    private headerService: HeaderService,
+    private router : Router
+  ) {
     headerService.headerData = {
       title : 'Pedidos',
       icon : 'dashboard',
@@ -17,6 +21,10 @@ export class PedidoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  navigateToPedidoCreate() : void {
+    this.router.navigate(['/pedidos/create']);
   }
 
 }
