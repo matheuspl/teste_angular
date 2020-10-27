@@ -23,6 +23,10 @@ import { ProdutoReadComponent } from './components/produto/produto-read/produto-
 
 import localePT from "@angular/common/locales/pt";
 import { registerLocaleData } from "@angular/common";
+import { ClienteReadComponent } from './components/cliente/cliente-read/cliente-read.component';
+import { ClienteFormComponent } from './components/cliente/cliente-form/cliente-form.component';
+import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
+import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 registerLocaleData(localePT);
 
 @NgModule({
@@ -36,6 +40,10 @@ registerLocaleData(localePT);
     ClienteComponent,
     PedidoComponent,
     ProdutoReadComponent,
+    ClienteReadComponent,
+    ClienteFormComponent,
+    ClienteCreateComponent,
+    ClienteUpdateComponent,
   ],
   imports: [
     AppRoutingModule,
