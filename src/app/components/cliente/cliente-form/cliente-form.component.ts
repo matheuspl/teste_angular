@@ -21,6 +21,9 @@ export class ClienteFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.clienteService.clienteSource$.subscribe(cliente => {
+      this.cliente = JSON.parse(cliente);
+    })
   }
 
   salvar() : void {

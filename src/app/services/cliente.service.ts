@@ -14,7 +14,9 @@ export class ClienteService {
   baseUrl = `${environment.apiUrl}/clientes`;
   cliente : Cliente;
   private pendenteSource = new Subject<string>();
+  private clienteSource = new Subject<string>();
   pendente$ = this.pendenteSource.asObservable();
+  clienteSource$ = this.clienteSource.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -32,9 +34,29 @@ export class ClienteService {
     this.pendenteSource.next(JSON.stringify(cliente));
   }
 
+  carregarCliente(cliente : Cliente) : void {
+    this.clienteSource.next(JSON.stringify(cliente));
+  }
+
   create(cliente: Cliente) : Observable<Cliente> {
     cliente['data-cadastro'] = new Date().toLocaleDateString();
     return this.http.post<Cliente>(this.baseUrl, cliente).pipe(
+      map(obj => obj),
+      catchError(e => this.messageHandlerService.errorHandler(e))
+    );
+  }
+
+  readById(id : string) : Observable<Cliente> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get<Cliente>(url).pipe(
+      map(obj => obj),
+      catchError(e => this.messageHandlerService.errorHandler(e))
+    );
+  }
+
+  update(cliente: Cliente) : Observable<Cliente> {
+    const url = `${this.baseUrl}/${cliente.id}`;
+    return this.http.put<Cliente>(url, cliente).pipe(
       map(obj => obj),
       catchError(e => this.messageHandlerService.errorHandler(e))
     );
