@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HeaderService } from '../../components/template/header/header.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { HeaderService } from '../../components/template/header/header.service';
 })
 export class ClienteComponent implements OnInit {
 
-  constructor(private headerService: HeaderService) {
+  constructor(
+    private headerService: HeaderService,
+    private router: Router
+  ) {
     headerService.headerData = {
       title : 'Clientes',
       icon : 'contacts',
@@ -17,6 +21,10 @@ export class ClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  navigateToClienteCreate() : void {
+    this.router.navigate(['/clientes/create']);
   }
 
 }

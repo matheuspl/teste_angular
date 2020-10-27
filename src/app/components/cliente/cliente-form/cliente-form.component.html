@@ -1,1 +1,16 @@
-<p>cliente-form works!</p>
+<form>
+  <mat-form-field>
+    <input matInput placeholder="Nome"
+      [(ngModel)]=cliente.nome name="nome">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Status"
+      [(ngModel)]=cliente.status name="status">
+  </mat-form-field>
+</form>
+<button mat-raised-button (click)="salvar()" color="primary">
+  Salvar
+</button>
+<button mat-raised-button (click)="cancel()">
+  Cancelar
+</button>
