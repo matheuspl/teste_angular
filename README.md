@@ -2,7 +2,7 @@
 
 Nesse projeto foi utilizado Angular versão 10.1.7.
 
-## Rodando o projeto
+## Instalando e inicializando o projeto
 
 Primeiramente, necessário fazer download do projeto. Após download, rodar o comando `npm install` para instalar os módulos externos.
 
