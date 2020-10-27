@@ -1,4 +1,6 @@
+import { Produto } from './Produto.model';
+
 export interface ProdutoPedido {
-  produto: string;
+  produto: Produto;
   quantidade: number;
 }

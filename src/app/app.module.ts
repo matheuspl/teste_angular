@@ -31,6 +31,7 @@ import { ClienteReadComponent } from './components/cliente/cliente-read/cliente-
 import { ClienteFormComponent } from './components/cliente/cliente-form/cliente-form.component';
 import { ClienteCreateComponent } from './components/cliente/cliente-create/cliente-create.component';
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
+import { PedidoReadComponent } from './components/pedido/pedido-read/pedido-read.component';
 registerLocaleData(localePT);
 
 @NgModule({
@@ -48,6 +49,7 @@ registerLocaleData(localePT);
     ClienteFormComponent,
     ClienteCreateComponent,
     ClienteUpdateComponent,
+    PedidoReadComponent,
   ],
   imports: [
     AppRoutingModule,

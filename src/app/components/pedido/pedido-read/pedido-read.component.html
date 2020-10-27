@@ -1,0 +1,27 @@
+<mat-card class="home mat-elevation-z3 pedido-container" *ngFor="let pedido of pedidos">
+  <mat-card-content class="pedido-content">
+    <div class="pedido-dados-container">
+      <div class="pedido-cliente">Cliente: {{ !!pedido.cliente ? pedido.cliente.nome : '' }}</div>
+      <div class="pedido-data">Data do Pedido: {{ pedido.dataCadastro }}</div>
+      <div class="pedido-status">Status da Entrega: {{ pedido.statusEntrega }}</div>
+    </div>
+    <hr class="pedidos-divisor">
+    <div class="pedido-produtos-container">
+      <div *ngFor="let pedidoproduto of pedido.produtos">
+        <div class="pedido-produtos">
+          <div class="produto-nome">Produto: {{ pedidoproduto.produto.nome }}</div>
+          <div class="produto-quantidade">Quantidade: {{ pedidoproduto.quantidade }}</div>
+          <div class="produto-preco">Preço: {{ pedidoproduto.produto.valor | currency : 'BRL' }}</div>
+        </div>
+      </div>
+      <hr class="pedidos-divisor">
+      <div class="produtos-total">
+        <div></div>
+        <div></div>
+        <div>
+          Total: {{ pedido.total | currency : 'BRL' }}
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

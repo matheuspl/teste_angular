@@ -1,0 +1,37 @@
+.pedido-container {
+  margin-bottom: 10px;
+}
+
+.pedido-dados-container {
+  display: inline-grid;
+  grid-template-columns: 33% 33% 33%;
+  text-align: left;
+  width: 100%;
+  font-size: 1.2em;
+}
+
+.pedido-produtos-container {
+  margin-top: 10px;
+}
+
+.pedido-produtos {
+  display: inline-grid;
+  grid-template-columns: 33% 33% 33%;
+  text-align: left;
+  width: 100%;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+.pedidos-divisor {
+  opacity: 10%;
+  color: #333;
+}
+
+.produtos-total {
+  display: inline-grid;
+  grid-template-columns: 33% 33% 33%;
+  text-align: left;
+  width: 100%;
+  font-size: 1.1em;
+}
