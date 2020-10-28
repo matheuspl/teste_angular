@@ -9,6 +9,7 @@ import { Produto } from '../../../models/Produto.model';
 import { ProdutoService } from '../../../services/produto.service';
 import { ClienteService } from '../../../services/cliente.service';
 import { AddProdutoDialogComponent } from './dialog/add-produto-dialog/add-produto-dialog.component';
+import { ProdutoPedido } from '../../../models/ProdutoPedido';
 
 @Component({
   selector: 'app-pedido-create',
@@ -57,22 +58,23 @@ export class PedidoCreateComponent implements OnInit {
     const dialogRef = this.dialog.open(AddProdutoDialogComponent, {
      width: '600px',
      data: { produtos : this.produtosSelect }
-   });
+    });
 
-   dialogRef.afterClosed().subscribe(result => {
-     if(!!result){
-       let filterProdutoSelecionado = this.produtos.filter(produto => result.produto == produto.id);
+    dialogRef.afterClosed().subscribe(result => {
+      if(!!result){
+        let filterProdutoSelecionado = this.produtos.filter(produto => result.produto == produto.id);
 
-       if(filterProdutoSelecionado.length > 0) {
+        if(filterProdutoSelecionado.length > 0) {
           let produtoSelecionado = filterProdutoSelecionado[0];
           let produtoPedido = {
             produto: produtoSelecionado,
             quantidade: result.quantidade
           }
           this.pedido.produtos.push(produtoPedido);
-       }
-     }
-   });
+        }
+        console.log(this.pedido);
+      }
+    });
   }
 
   private carregarClientes() : void {

@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/template/header/header.component';
@@ -74,6 +75,7 @@ registerLocaleData(localePT);
     MatInputModule,
     MatSelectModule,
     MatDialogModule,
+    MatDividerModule,
   ],
   entryComponents : [
     AddProdutoDialogComponent
