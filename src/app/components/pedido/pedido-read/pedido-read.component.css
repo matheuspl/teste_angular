@@ -1,3 +1,17 @@
+.filtros-container {
+  padding: 15px 15px 0 15px;
+  margin-bottom: 10px;
+}
+
+.filtro-status {
+  margin-left : 15px;
+}
+
+.filtros-container button {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
 .pedido-container {
   margin-bottom: 10px;
 }

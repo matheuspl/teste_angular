@@ -18,8 +18,13 @@ export class PedidoService {
     private messageHandlerService: MessageHandlerService
   ) { }
 
-  read() : Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(this.baseUrl).pipe(
+  read(statusEntregaFilter : string = null) : Observable<Pedido[]> {
+    let url = this.baseUrl;
+    if(!!statusEntregaFilter) {
+      url += `?status-entrega=${statusEntregaFilter}`;
+    }
+
+    return this.http.get<Pedido[]>(url).pipe(
       map(obj => obj),
       catchError(e => this.messageHandlerService.errorHandler(e))
     );
@@ -31,6 +36,16 @@ export class PedidoService {
       url = environment.jsonServer ? this.baseUrl : jsonServerUrl;
 
     return this.http.post<Pedido>(url, pedido).pipe(
+      map(obj => obj),
+      catchError(e => this.messageHandlerService.errorHandler(e))
+    );
+  }
+
+  readByClienteId(clienteId : string) : Observable<Pedido[]> {
+    let url = `${environment.apiUrl}/clientes/${clienteId}/pedidos`;
+    console.log(url);
+
+    return this.http.get<Pedido[]>(url).pipe(
       map(obj => obj),
       catchError(e => this.messageHandlerService.errorHandler(e))
     );

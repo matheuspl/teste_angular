@@ -1,3 +1,22 @@
+<div class="mat-elevation-z3">
+  <div class="filtros-container">
+    <mat-form-field class="filtro-ordem">
+      <mat-label>Cliente</mat-label>
+      <mat-select [(value)]="clienteFilter">
+        <mat-option *ngFor="let cliente of clientes" value="{{cliente.id}}">
+          {{ cliente.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="filtro-status">
+      <mat-label>Status Entrega</mat-label>
+      <input matInput placeholder="Ex. Entregue" [(ngModel)]="statusEntregaFilter" >
+    </mat-form-field>
+    <button mat-raised-button (click)="buscarPedidos()" color="primary">
+      Buscar
+    </button>
+  </div>
+</div>
 <mat-card class="home mat-elevation-z3 pedido-container" *ngFor="let pedido of pedidos">
   <mat-card-content class="pedido-content">
     <div class="pedido-dados-container">
