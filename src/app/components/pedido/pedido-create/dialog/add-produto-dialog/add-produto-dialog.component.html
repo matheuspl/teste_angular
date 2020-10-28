@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Adicionar Produto ao Pedido</h1>
+<div mat-dialog-content>
+  <mat-form-field class="field-cliente">
+    <mat-label>Produto</mat-label>
+    <mat-select [(value)]="retorno.produto">
+      <mat-option *ngFor="let produto of data.produtos" value="{{produto.id}}">
+        {{ produto.nome }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="field-quantidade">
+    <mat-label>Quantidade</mat-label>
+    <input matInput [(ngModel)]="retorno.quantidade">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="retorno" cdkFocusInitial>Adicionar</button>
+</div>

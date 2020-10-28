@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { Pedido } from '../../../models/Pedido.model';
 import { PedidoService } from '../../../services/pedido.service';
 import { MessageHandlerService } from '../../../services/message-handler.service';
@@ -7,6 +8,7 @@ import { Cliente } from '../../../models/Cliente.model';
 import { Produto } from '../../../models/Produto.model';
 import { ProdutoService } from '../../../services/produto.service';
 import { ClienteService } from '../../../services/cliente.service';
+import { AddProdutoDialogComponent } from './dialog/add-produto-dialog/add-produto-dialog.component';
 
 @Component({
   selector: 'app-pedido-create',
@@ -24,18 +26,20 @@ export class PedidoCreateComponent implements OnInit {
 
   clientes: Cliente[] = [];
   produtos: Produto[] = [];
+  produtosSelect: {}[] = [];
 
   constructor(
     private pedidoService : PedidoService,
     private router : Router,
     private messageHandlerService: MessageHandlerService,
     private produtoService : ProdutoService,
-    private clienteService : ClienteService
+    private clienteService : ClienteService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.carregarClientes();
-    // this.carregarProdutos();
+    this.carregarProdutos();
   }
 
   salvar() : void {
@@ -49,10 +53,41 @@ export class PedidoCreateComponent implements OnInit {
     this.router.navigate(['/pedidos']);
   }
 
+  openDialog() : void {
+    const dialogRef = this.dialog.open(AddProdutoDialogComponent, {
+     width: '600px',
+     data: { produtos : this.produtosSelect }
+   });
+
+   dialogRef.afterClosed().subscribe(result => {
+     if(!!result){
+       let filterProdutoSelecionado = this.produtos.filter(produto => result.produto == produto.id);
+
+       if(filterProdutoSelecionado.length > 0) {
+          let produtoSelecionado = filterProdutoSelecionado[0];
+          let produtoPedido = {
+            produto: produtoSelecionado,
+            quantidade: result.quantidade
+          }
+          this.pedido.produtos.push(produtoPedido);
+       }
+     }
+   });
+  }
+
   private carregarClientes() : void {
     this.clienteService.read().subscribe(clientes => {
       this.clientes = clientes.map(cliente => {
         return { id: cliente.id, nome: cliente.nome }
+      });
+    });
+  }
+
+  private carregarProdutos() : void {
+    this.produtoService.read().subscribe(produtos => {
+      this.produtos = produtos;
+      this.produtosSelect = produtos.map(produto => {
+        return { id: produto.id, nome: produto.nome }
       });
     });
   }

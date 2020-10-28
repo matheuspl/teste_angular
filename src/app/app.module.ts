@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/template/header/header.component';
@@ -34,6 +35,7 @@ import { ClienteCreateComponent } from './components/cliente/cliente-create/clie
 import { ClienteUpdateComponent } from './components/cliente/cliente-update/cliente-update.component';
 import { PedidoReadComponent } from './components/pedido/pedido-read/pedido-read.component';
 import { PedidoCreateComponent } from './components/pedido/pedido-create/pedido-create.component';
+import { AddProdutoDialogComponent } from './components/pedido/pedido-create/dialog/add-produto-dialog/add-produto-dialog.component';
 registerLocaleData(localePT);
 
 @NgModule({
@@ -53,6 +55,7 @@ registerLocaleData(localePT);
     ClienteUpdateComponent,
     PedidoReadComponent,
     PedidoCreateComponent,
+    AddProdutoDialogComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -70,6 +73,10 @@ registerLocaleData(localePT);
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDialogModule,
+  ],
+  entryComponents : [
+    AddProdutoDialogComponent
   ],
   providers: [{
     provide: LOCALE_ID,
