@@ -9,3 +9,16 @@ table {
 .edit > i {
   color: #d9cd26;
 }
+
+.filtros-container {
+  padding: 15px 15px 0 15px;
+}
+
+.filtro-status {
+  margin-left : 15px;
+}
+
+button {
+  margin-left: 10px;
+  vertical-align: middle;
+}

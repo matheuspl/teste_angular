@@ -1,4 +1,21 @@
 <div class="mat-elevation-z8">
+  <div class="filtros-container">
+    <mat-form-field class="filtro-ordem">
+      <mat-label>Ordenar Por</mat-label>
+      <mat-select [(value)]="selectedOrderFilter">
+        <mat-option *ngFor="let campo of campos" value="{{campo.value}}">
+          {{ campo.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="filtro-status">
+      <mat-label>Status</mat-label>
+      <input matInput placeholder="Ex. Ativo" [(ngModel)]="statusFilter" >
+    </mat-form-field>
+    <button mat-raised-button (click)="filtrar()" color="primary">
+      Filtrar
+    </button>
+  </div>
   <table mat-table class="full-width-table" [dataSource]="clientes">
     <!-- Id Column -->
     <ng-container matColumnDef="id">

@@ -23,8 +23,21 @@ export class ClienteService {
     private messageHandlerService: MessageHandlerService
   ) { }
 
-  read() : Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(this.baseUrl).pipe(
+  read(filtroStatus : string = null, ordem : string = null) : Observable<Cliente[]> {
+    let
+      url = this.baseUrl;
+
+    if(!!filtroStatus) {
+      url += `?status=${filtroStatus}`;
+    }
+    if(!!ordem) {
+      //Feita comparação porque no jsonserver o sort funciona assim.
+      let query = environment.jsonServer ? `_sort=${ordem}` : `ordem=${ordem}`;
+      url += !!filtroStatus ? `&` : `?`;
+      url += query;
+    }
+
+    return this.http.get<Cliente[]>(url).pipe(
       map(obj => obj),
       catchError(e => this.messageHandlerService.errorHandler(e))
     );

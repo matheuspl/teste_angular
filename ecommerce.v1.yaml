@@ -1,0 +1,376 @@
+swagger: '2.0'
+info:
+  title: ECommerce
+  version: 1.0.0
+  contact: {}
+  description: API de vendas para o e-commerce da Big Corp S/A
+host: 'localhost:3000'
+schemes:
+  - https
+produces:
+  - application/json
+consumes:
+  - application/json
+paths:
+  /clientes:
+    get:
+      summary: ListarClientes
+      tags:
+        - Clientes
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/cliente'
+        '204':
+          description: No Content
+          schema:
+            type: object
+            properties: {}
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/retorno'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/retorno'
+      operationId: ListarClientes
+      security:
+        - client_id: []
+      description: Lista todos os clientes de acordo com o filtro
+      parameters:
+        - type: string
+          in: query
+          name: status
+          description: Filtro de status a ser aplicado
+        - type: string
+          in: query
+          name: ordem
+          description: Campo a ser usado como ordenação da listagem
+          required: true
+    post:
+      summary: InserirCliente
+      operationId: InserirCliente
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/retorno'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/retorno'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/retorno'
+      description: Cria um novo cliente
+      security:
+        - client_id: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/cliente'
+          description: ''
+      tags:
+        - Clientes
+    parameters: []
+  '/clientes/{idCliente}':
+    get:
+      summary: ObterCliente
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/cliente'
+        '204':
+          description: No Content
+          schema:
+            type: object
+            properties: {}
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/retorno'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/retorno'
+      operationId: ObterCliente
+      tags:
+        - Clientes
+      description: Recupera os dados do cliente selecionado
+      parameters: []
+      security:
+        - client_id: []
+    parameters:
+      - type: string
+        name: idCliente
+        in: path
+        required: true
+        description: Identificador do cliente a ser atualizado
+    put:
+      summary: AtualizarCliente
+      operationId: AtualizarCliente
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/retorno'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/retorno'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/retorno'
+      description: Atualiza os dados de um cliente
+      security:
+        - client_id: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/cliente'
+          description: ''
+      tags:
+        - Clientes
+  /pedidos:
+    get:
+      summary: ListarPedidos
+      tags:
+        - Pedidos
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/pedido'
+        '204':
+          description: No Content
+          schema:
+            type: object
+            properties: {}
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/retorno'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/retorno'
+      operationId: ListarPedidos
+      security:
+        - client_id: []
+      parameters:
+        - type: string
+          in: query
+          name: status-entrega
+          description: Filtro de status a ser aplicado na listagem
+          required: true
+      description: Lista todos os pedidos conforme o filtro de status da entrega
+  /produtos:
+    get:
+      summary: ListarProdutos
+      tags:
+        - Produtos
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/produto'
+        '204':
+          description: No Content
+          schema:
+            type: object
+            properties: {}
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/retorno'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/retorno'
+      operationId: ListarProdutos
+      description: Lista todos os produtos
+  '/clientes/{idcliente}/pedidos':
+    parameters:
+      - type: string
+        name: idcliente
+        in: path
+        required: true
+        description: Identificador do cliente
+    get:
+      summary: ListarPedidosCliente
+      tags:
+        - Clientes
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/pedido'
+        '204':
+          description: No Content
+          schema:
+            type: object
+            properties: {}
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/retorno'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/retorno'
+      operationId: ListarPedidosCliente
+      description: Lista todos os pedidos de um cliente
+      security:
+        - client_id: []
+    post:
+      summary: InserirPedido
+      operationId: InserirPedido
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/retorno'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/retorno'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/retorno'
+      description: Cria um novo pedido para o cliente
+      security:
+        - client_id: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/pedido'
+          description: ''
+      tags:
+        - Clientes
+definitions:
+  cliente:
+    title: cliente
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: Identificador do cliente
+      nome:
+        type: string
+        example: Fulano de Tal
+        description: Nome do cliente
+      data-cadastro:
+        type: string
+        format: date
+        example: 10/12/2020
+        description: Data de cadastro do cliente
+      status:
+        type: string
+        example: Ativo
+        description: Status do cliente (Ativo/Inativo)
+    required:
+      - nome
+  produto:
+    title: produto
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: Identificador do produto
+      nome:
+        type: string
+        example: caixa de som
+        description: Nome do produto
+      valor:
+        type: number
+        example: '2100.90'
+        description: Valor do produto
+      disponivel:
+        type: boolean
+        example: 'true'
+        description: Indicador de disponibilidade do produto
+    required:
+      - id
+      - nome
+      - valor
+  pedido:
+    title: pedido
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: |
+          Identificador do pedido
+      data-cadastro:
+        type: string
+        format: date-time
+        example: '10/12/2020 13:50:55'
+        description: Data de cadasro do pedido
+      idCliente:
+        type: string
+        format: uuid
+        description: Identificador do cliente que efetuou a compra
+      status-entrega:
+        type: string
+        description: 'Status do processo de entrega (Pendente, Cancelado, Entregue)'
+        example: Entregue
+      produtos:
+        type: array
+        items:
+          $ref: '#/definitions/produtoPedido'
+    required:
+      - id
+      - data-cadastro
+      - idCliente
+      - status-entrega
+  retorno:
+    title: retorno
+    type: object
+    properties:
+      mensagem:
+        type: string
+        example: Exemplo Sucesso
+        description: Mensagem de retorno do processamento
+      sucesso:
+        type: boolean
+        description: Indicação de sucesso o falha
+      descricao:
+        type: string
+        example: Texto longo descritivo
+        description: Descrição longa do retorno
+  produtoPedido:
+    title: produtoPedido
+    type: object
+    properties:
+      produto:
+        $ref: '#/definitions/produto'
+      quantidade:
+        type: integer
+        description: Quantidade solicitada no pedido
+    required:
+      - quantidade
+basePath: /ecommerce/v1
+securityDefinitions:
+  client_id:
+    name: client_id
+    type: apiKey
+    in: header
+    description: Identificador do consumidor da API
