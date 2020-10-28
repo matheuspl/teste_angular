@@ -15,8 +15,8 @@
           [(ngModel)]=pedido.statusEntrega name="status">
       </mat-form-field>
     </div>
-    <mat-divider *ngIf="pedido.produtos.length > 0"></mat-divider>
-    <div class="container-produtos-pedido">
+    <div class="container-produtos-pedido" *ngIf="pedido.produtos.length > 0">
+      <mat-divider></mat-divider>
       <div class="produtos-pedido" *ngFor="let produtoPedido of pedido.produtos">
         <div class="produto">
           Produto: {{ produtoPedido.produto.nome }}
@@ -27,10 +27,10 @@
       </div>
     </div>
   </form>
-  <button mat-raised-button (click)="openDialog()">Adicionar Produto</button>
   <button mat-raised-button (click)="salvar()" color="primary">
     Salvar
   </button>
+  <button mat-raised-button (click)="openDialog()" color="primary">Adicionar Produto</button>
   <button mat-raised-button (click)="cancel()">
     Cancelar
   </button>

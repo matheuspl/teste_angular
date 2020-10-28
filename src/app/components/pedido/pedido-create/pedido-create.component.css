@@ -17,7 +17,7 @@ button {
 }
 
 .container-produtos-pedido {
-  margin: 20px 0 20px;
+  margin: 0 0 20px;
   width: 100%
 }
 
@@ -26,12 +26,12 @@ button {
   grid-template-columns: 50% 50%;
   text-align: left;
   width: 100%;
-  font-size: 1.1em;
 }
 
 .mat-card .mat-divider-horizontal {
     position: relative;
     margin: auto;
-    width: 95%;
+    width: 100%;
     left: inherit;
+    margin-bottom: 20px;
 }
