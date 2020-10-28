@@ -34,7 +34,6 @@ export class ClienteReadComponent implements OnInit {
   }
 
   filtrar(): void {
-    console.log(this.statusFilter);
     this.clienteService.read(
       this.statusFilter,
       this.selectedOrderFilter

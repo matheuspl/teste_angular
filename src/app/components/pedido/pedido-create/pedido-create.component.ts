@@ -15,7 +15,13 @@ import { ClienteService } from '../../../services/cliente.service';
 })
 export class PedidoCreateComponent implements OnInit {
 
-  pedido: Pedido;
+  pedido: Pedido = {
+    idCliente : '',
+    statusEntrega : '',
+    total : 0,
+    produtos : []
+  };
+
   clientes: Cliente[] = [];
   produtos: Produto[] = [];
 
@@ -28,11 +34,8 @@ export class PedidoCreateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.clienteService.read().subscribe(clientes => {
-      this.clientes = clientes.map(cliente => {
-        return { id : cliente.id, nome: cliente.nome }
-      });
-    });
+    this.carregarClientes();
+    // this.carregarProdutos();
   }
 
   salvar() : void {
@@ -46,4 +49,11 @@ export class PedidoCreateComponent implements OnInit {
     this.router.navigate(['/pedidos']);
   }
 
+  private carregarClientes() : void {
+    this.clienteService.read().subscribe(clientes => {
+      this.clientes = clientes.map(cliente => {
+        return { id: cliente.id, nome: cliente.nome }
+      });
+    });
+  }
 }

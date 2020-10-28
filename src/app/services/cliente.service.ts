@@ -31,7 +31,6 @@ export class ClienteService {
       url += `?status=${filtroStatus}`;
     }
     if(!!ordem) {
-      //Feita comparação porque no jsonserver o sort funciona assim.
       let query = environment.jsonServer ? `_sort=${ordem}` : `ordem=${ordem}`;
       url += !!filtroStatus ? `&` : `?`;
       url += query;

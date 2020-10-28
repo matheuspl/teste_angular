@@ -1,6 +1,6 @@
 <div class="mat-elevation-z3">
   <div class="filtros-container">
-    <mat-form-field class="filtro-ordem">
+    <mat-form-field class="filtro-cliente">
       <mat-label>Cliente</mat-label>
       <mat-select [(value)]="clienteFilter">
         <mat-option *ngFor="let cliente of clientes" value="{{cliente.id}}">
@@ -34,7 +34,7 @@
         </div>
       </div>
       <hr class="pedidos-divisor">
-      <div class="produtos-total">
+      <div *ngIf="pedido.produtos.length > 0" class="produtos-total">
         <div></div>
         <div></div>
         <div>

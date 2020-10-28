@@ -1,14 +1,20 @@
 <mat-card>
   <mat-card-title>Novo Pedido</mat-card-title>
   <form>
-    <!-- <mat-form-field>
-      <input matInput placeholder="Nome"
-        [(ngModel)]=cliente.nome name="nome">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Status"
-        [(ngModel)]=cliente.status name="status">
-    </mat-form-field> -->
+    <div class="container-top">
+      <mat-form-field class="field-cliente">
+        <mat-label>Cliente</mat-label>
+        <mat-select [(value)]="pedido.idCliente">
+          <mat-option *ngFor="let cliente of clientes" value="{{cliente.id}}">
+            {{ cliente.nome }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="field-status">
+        <input matInput placeholder="Status da Entrega"
+          [(ngModel)]=pedido.statusEntrega name="status">
+      </mat-form-field>
+    </div>
   </form>
   <button mat-raised-button (click)="salvar()" color="primary">
     Salvar

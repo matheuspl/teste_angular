@@ -50,15 +50,18 @@ export class PedidoReadComponent implements OnInit {
       this.clienteService.readById(pedido.idCliente).subscribe(cliente => {
         pedido.cliente = cliente;
       });
+
       pedido.dataCadastro = pedido['data-cadastro'];
       pedido.statusEntrega = pedido['status-entrega'];
       delete pedido['data-cadastro'];
       delete pedido['status-entrega'];
-      pedido.total = pedido.produtos.map(
-        produto => produto.produto.valor * produto.quantidade
-      ).reduce(
-        (accumulator, currentValue) => accumulator + currentValue
-      );
+
+      if(pedido.produtos.length > 0) {
+        pedido.total = pedido.produtos.map(
+          produto => produto.produto.valor * produto.quantidade
+        ).reduce((accumulator, currentValue) => accumulator + currentValue);
+      }
+
       return pedido;
     });
   }

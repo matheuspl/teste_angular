@@ -12,6 +12,7 @@ import { map, catchError } from 'rxjs/operators';
 export class PedidoService {
 
   baseUrl = `${environment.apiUrl}/pedidos`;
+  urlClientes = `${environment.apiUrl}/clientes`;
 
   constructor(
     private http: HttpClient,
@@ -31,23 +32,28 @@ export class PedidoService {
   }
 
   create(pedido : Pedido) : Observable<Pedido> {
-    const
-      jsonServerUrl = `${environment.apiUrl}/cliente/${pedido.idCliente}/pedidos`,
-      url = environment.jsonServer ? this.baseUrl : jsonServerUrl;
+    const url = `${this.urlClientes}/${pedido.idCliente}/pedidos`;
+    pedido['data-cadastro'] = new Date().toLocaleString();
+    pedido['status-entrega'] = pedido.statusEntrega;
+    delete pedido.statusEntrega;
 
-    return this.http.post<Pedido>(url, pedido).pipe(
+    return this.http.post<Pedido>(
+      this.getPedidoClienteUrl(pedido.idCliente),
+      pedido
+    ).pipe(
       map(obj => obj),
       catchError(e => this.messageHandlerService.errorHandler(e))
     );
   }
 
   readByClienteId(clienteId : string) : Observable<Pedido[]> {
-    let url = `${environment.apiUrl}/clientes/${clienteId}/pedidos`;
-    console.log(url);
-
-    return this.http.get<Pedido[]>(url).pipe(
+    return this.http.get<Pedido[]>(this.getPedidoClienteUrl(clienteId)).pipe(
       map(obj => obj),
       catchError(e => this.messageHandlerService.errorHandler(e))
     );
+  }
+
+  private getPedidoClienteUrl(clienteId) : string {
+    return `${this.urlClientes}/${clienteId}/pedidos`;
   }
 }

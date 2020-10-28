@@ -1,6 +1,15 @@
-form {
+.container-top {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.field-cliente,
+.field-status {
+  width: 50%;
+}
+.field-status {
+  margin-left: 10px;
 }
 
 button {
